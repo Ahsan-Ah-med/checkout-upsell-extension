@@ -4,7 +4,10 @@ import {
   DatePicker,
   useAppMetafields,
   useMetafield,
-  useApplyMetafieldsChange
+  useApplyMetafieldsChange,
+  Banner,
+  Image,
+  useSettings,
 } from '@shopify/checkout-ui-extensions-react';
 
 render('Checkout::Dynamic::Render', () => <App />);
@@ -16,8 +19,10 @@ function App() {
   })
   
   const setDeliveryDate = useApplyMetafieldsChange();
-
+  const {banner_image} = useSettings();
   return (
+    <>
+    <Image source={banner_image}/>
     <DatePicker
       selected={deliveryDate?.value}
       onChange={ (value) => {
@@ -30,5 +35,6 @@ function App() {
         })
       } }
     />
+    </>
   );
 }

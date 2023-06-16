@@ -14,6 +14,7 @@ import {
   useCartLines,
   useApplyCartLinesChange,
   useExtensionApi,
+  useSettings,
 } from "@shopify/checkout-ui-extensions-react";
 
 // Set up the entry point for the extension
@@ -21,6 +22,7 @@ render("Checkout::Dynamic::Render", () => <App />);
 
 // The function that will render the app
 function App() {
+  const {banner_title} = useSettings();
   // Use `query` for fetching product data from the Storefront API, and use `i18n` to format
   // currencies, numbers, and translate strings
   const { query, i18n } = useExtensionApi();
@@ -195,9 +197,7 @@ function App() {
         </InlineLayout>
       </BlockStack>
       {showError && (
-        <Banner status="critical">
-          There was an issue adding this product. Please try again.
-        </Banner>
+        <Banner status="critical" title={banner_title}/>
       )}
     </BlockStack>
   );
